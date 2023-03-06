@@ -43,8 +43,8 @@ if uploaded_file is not None:
     user_list.insert(0,"Group analysis")
     selected_user=st.sidebar.selectbox("show analysis wrt",user_list)
     if st.sidebar.button("Show Analysis"):
-        num_messages,words,num_media_messages,num_links=Helper.fetch_stats(selected_user,df_new)
-        col1,col2,col3,col4=st.columns(4)
+        num_messages,words,num_links=Helper.fetch_stats(selected_user,df_new)
+        col1,col2,col3,col4=st.columns(3)
 
         with col1:
             st.header("Total Messages")
@@ -53,9 +53,6 @@ if uploaded_file is not None:
             st.header("Total Words")
             st.title(words)
         with col3:
-            st.header("Media Shared")
-            st.title(num_media_messages)
-        with col4:
             st.header("Links Shared")
             st.title(num_links)
 

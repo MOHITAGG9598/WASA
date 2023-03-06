@@ -21,7 +21,6 @@ def fetch_stats(selected_user,df):
     for message in df['message']:
         words.extend(message.split())
 
-    num_media_messages=df[df['message'] == '<Media omitted>\n'].shape[0]
     links=[]
     for message in df['message']:
         links.extend(extract.find_urls(message))
@@ -63,7 +62,7 @@ def positive_word_cloud(selected_user,df):
     if selected_user != "Group analysis":
         df = df[df['users'] == selected_user]
 
-    pos_word = df[df['roberta_pos'] > 0.5]
+    pos_word = df[df['Polarity'] > 0.2]
     pos_word = pos_word.pop('message')
     pos_word_df = pd.DataFrame(pos_word)
     stopwords = set(STOPWORDS)
@@ -78,8 +77,4 @@ def positive_word_cloud(selected_user,df):
 
     return wordcloud
 
-
-def sentiment_analysis(df):
-    x = df['Analysis'].value_counts()
-    return x
 
